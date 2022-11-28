@@ -7,10 +7,10 @@ let req;
 
 // Create a configuration object for our Azure SQL connection parameters
 var dbConfig = {
- server: "servermortgages.database.windows.net",
- database: "Mortgages", 
- user: "test",
- password: "Password@1",
+ server: "<servername>",
+ database: "<dbname>", 
+ user: "<username>",
+ password: "<password>",
  port: 1433,
  options: {
        encrypt: true
