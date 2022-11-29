@@ -1,46 +1,40 @@
-// Import the mssql package
-var sql = require("mssql");
+// Importing packages
+const sql = require("mssql");
+const conf = require('../config/serverConfig.js');
 
 // declaring variables
-var conn;
+let conn;
 let req;
 
-// Create a configuration object for our Azure SQL connection parameters
-var dbConfig = {
- server: "<servername>",
- database: "<dbname>", 
- user: "<username>",
- password: "<password>",
- port: 1433,
- options: {
-       encrypt: true
-   }
-};
-
+// initiating azure sql connection
 function setConnection() {
-    conn = new sql.ConnectionPool(dbConfig);
+  conn = new sql.ConnectionPool(conf.dbConfig);
 }
 
+// closing azure sql connection
 function closeConnection() {
-    conn.close();
+  conn.close();
 }
 
 function setRequest() {
-    req = new sql.Request(conn);
+  req = new sql.Request(conn);
 }
 
-function getRecord(query) {
-    conn.connect()
+function dbOperation(sql) {
+  setConnection();
+  setRequest();
+  return conn.connect()
     .then(function () {
-      req.query(query)
-      .then(function (recordset) {
-        closeConnection();
-        console.log(recordset);
-      })
-      .catch(function (err) {
-        console.log(err);
-        closeConnection();
-      })
+      const response = req.query(sql)
+        .then(function (recordset) {
+          closeConnection();
+          return recordset;
+        })
+        .catch(function (err) {
+          console.log(err);
+          closeConnection();
+        })
+      return response;
     })
     .catch(function (err) {
       console.log(err);
@@ -48,7 +42,5 @@ function getRecord(query) {
     });
 }
 
-var query = "SELECT TOP 2 * FROM [SalesLT].[Customer]";
-setConnection();
-setRequest();
-getRecord(query);
+// exporting modules, to be used in the other .js files
+module.exports = { dbOperation };
