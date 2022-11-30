@@ -1,0 +1,6 @@
+const QUERY = {
+    SELECT_PROSPECTS: 'SELECT * FROM prospectsDetails',
+    INSERT_PROSPECT: 'INSERT INTO prospectdetails (ProspectId,Cookie,SessionId,OtpEmailId,DomusCookieId,CustomerId,IBLogon) values (?,?,?,?,?)'
+}
+
+export default QUERY;
