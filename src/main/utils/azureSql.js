@@ -42,5 +42,11 @@ function dbOperation(sql) {
     });
 }
 
+// get record from the db
+async function getRecord(sql) {
+  const result = await azureSql.dbOperation(sql);
+  console.log(result);
+}
+
 // exporting modules, to be used in the other .js files
-module.exports = { dbOperation };
+module.exports = { getRecord };
