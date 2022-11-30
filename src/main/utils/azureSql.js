@@ -42,11 +42,23 @@ function dbOperation(sql) {
     });
 }
 
+// insert record in the db
+async function insertRecord(sql) {
+    const result = await azureSql.dbOperation(sql);
+    console.log(result);
+}
+
 // get record from the db
 async function getRecord(sql) {
-  const result = await azureSql.dbOperation(sql);
-  console.log(result);
+    const result = await azureSql.dbOperation(sql);
+    console.log(result);
+}
+
+// update record in the db
+async function updateRecord(sql) {
+    const result = await azureSql.dbOperation(sql);
+    console.log(result);
 }
 
 // exporting modules, to be used in the other .js files
-module.exports = { getRecord };
+module.exports = { insertRecord, getRecord, updateRecord };
