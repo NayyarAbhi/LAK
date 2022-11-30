@@ -44,20 +44,17 @@ function dbOperation(sql) {
 
 // insert record in the db
 async function insertRecord(sql) {
-    const result = await azureSql.dbOperation(sql);
-    console.log(result);
+  return await dbOperation(sql);
 }
 
 // get record from the db
 async function getRecord(sql) {
-    const result = await azureSql.dbOperation(sql);
-    console.log(result);
+  return await dbOperation(sql);
 }
 
 // update record in the db
 async function updateRecord(sql) {
-    const result = await azureSql.dbOperation(sql);
-    console.log(result);
+  return await dbOperation(sql);
 }
 
 // exporting modules, to be used in the other .js files
